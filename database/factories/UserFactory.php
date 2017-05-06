@@ -1,9 +1,5 @@
 <?php
 
-use App\Article;
-use App\Comment;
-use App\Tag;
-use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Carbon;
 
@@ -19,7 +15,7 @@ use Illuminate\Support\Carbon;
 */
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(\App\User::class, function (Faker $faker) {
 
     return [
         'username' => str_replace('.', '', $faker->unique()->userName),
@@ -30,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(Article::class, function (Faker $faker) {
+$factory->define(\App\Article::class, function (Faker $faker) {
 
     static $reduce = 999;
 
@@ -42,12 +38,12 @@ $factory->define(Article::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(Comment::class, function (Faker $faker) {
+$factory->define(\App\Comment::class, function (Faker $faker) {
 
     static $users;
     static $reduce = 999;
 
-    $users = $users ?: User::all();
+    $users = $users ?: \App\User::all();
 
     return [
         'body' => $faker->paragraph($faker->numberBetween(1, 5)),
@@ -56,7 +52,7 @@ $factory->define(Comment::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(Tag::class, function (Faker $faker) {
+$factory->define(\App\Tag::class, function (Faker $faker) {
 
     return [
         'name' => $faker->unique()->word,
