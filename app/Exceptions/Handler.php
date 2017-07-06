@@ -148,7 +148,7 @@ class Handler extends ExceptionHandler
         $errors = $exception->validator->errors()->messages();
 
         return $request->expectsJson()
-                    ? response()->json(['message' => $exception->getMessage(), 'errors' => $errors])
+                    ? response()->json(['message' => $exception->getMessage(), 'errors' => $errors], 422)
                     : redirect()->back()->withInput()->withErrors(
                             $errors, $exception->errorBag
                       );
