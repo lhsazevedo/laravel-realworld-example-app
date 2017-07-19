@@ -158,7 +158,7 @@ class Handler extends ExceptionHandler
         return response()->json([
             'message' => $exception->getMessage(),
             'errors' => $exception->errors(),
-        ], 422);
+        ], $exception->status);
     }
 
     /**
