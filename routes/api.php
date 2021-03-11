@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\RegistrationController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('users', RegistrationController::class);
+Route::post('users', RegisteredUserController::class);

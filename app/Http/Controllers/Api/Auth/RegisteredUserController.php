@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class RegistrationController extends BaseController
+class RegisteredUserController extends BaseController
 {
     public function __invoke(RegistrationRequest $request)
     {
