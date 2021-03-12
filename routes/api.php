@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\RegisteredUserController;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('users', RegisteredUserController::class);
+Route::post('users', RegisterController::class);
+Route::post('users/login', LoginController::class);
+
+Route::get('user', [UserController::class, 'index']);
+Route::match(['put', 'patch'], 'user', [UserController::class, 'update']);

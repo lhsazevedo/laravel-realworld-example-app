@@ -19,7 +19,9 @@ class User extends Authenticatable
     protected $fillable = [
         'username',
         'email',
-        'password',
+        // 'password',
+        'bio',
+        'image'
     ];
 
     /**
@@ -28,8 +30,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'id',
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -38,7 +43,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        // 'email_verified_at' => 'datetime',
     ];
 
     public function getToken()

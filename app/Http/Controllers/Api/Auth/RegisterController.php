@@ -3,22 +3,21 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller as BaseController;
-use App\Http\Requests\RegistrationRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class RegisteredUserController extends BaseController
+class RegisterController extends BaseController
 {
-    public function __invoke(RegistrationRequest $request)
+    public function __invoke(RegisterRequest $request)
     {
-        Auth::login($user = User::create([
+        $user = User::forceCreate([
             'username' => $request->input('user.username'),
             'email' => $request->input('user.email'),
             'password' => Hash::make($request->input('user.password')),
-        ]));
+        ]);
 
         event(new Registered($user));
 
