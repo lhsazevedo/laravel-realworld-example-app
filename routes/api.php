@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Auth
 Route::post('users', RegisterController::class);
 Route::post('users/login', LoginController::class);
 
+// User
 Route::get('user', [UserController::class, 'index']);
 Route::match(['put', 'patch'], 'user', [UserController::class, 'update']);
+
+// Profiles
+Route::get('profiles/{user}', [ProfileController::class, 'show']);
+Route::post('profiles/{user}/follow', [ProfileController::class, 'follow']);
+Route::delete('profiles/{user}/follow', [ProfileController::class, 'unFollow']);

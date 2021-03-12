@@ -27,13 +27,13 @@ class UserTest extends TestCase
 
     public function test_it_returns_invalid_token_error_when_using_a_wrong_token()
     {
-        $this->markTestSkipped();
+        // $this->markTestSkipped();
 
         $response = $this->getJson('/api/user', [
             'Authorization' => 'Bearer InsertWrongTokenHereToTestPleaseSendHelp'
         ]);
 
-        $response->assertStatus(401)
+        $response->assertUnauthorized()
             ->assertJson([
                 'errors' => [
                     'message' => 'JWT error: Token is invalid',
