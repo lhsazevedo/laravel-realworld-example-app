@@ -7,6 +7,7 @@ use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Http\Request;
+use Throwable;
 
 class JwtGuard implements Guard
 {
@@ -97,7 +98,11 @@ class JwtGuard implements Guard
             return null;
         }
 
-        $payload = JWT::decode($token, config('app.key'), ['HS256']);
+        try {
+            $payload = JWT::decode($token, config('app.key'), ['HS256']);
+        } catch (Throwable $e) {
+            return null;
+        }
 
         return $payload;
     }

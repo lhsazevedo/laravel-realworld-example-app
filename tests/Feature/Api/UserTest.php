@@ -25,29 +25,20 @@ class UserTest extends TestCase
             ]);
     }
 
-    public function test_it_returns_invalid_token_error_when_using_a_wrong_token()
+    public function test_it_returns_unauthorized_when_using_a_wrong_token()
     {
-        // $this->markTestSkipped();
-
         $response = $this->getJson('/api/user', [
             'Authorization' => 'Bearer InsertWrongTokenHereToTestPleaseSendHelp'
         ]);
 
-        $response->assertUnauthorized()
-            ->assertJson([
-                'errors' => [
-                    'message' => 'JWT error: Token is invalid',
-                ]
-            ]);
+        $response->assertUnauthorized();
     }
 
     public function test_it_returns_an_unauthorized_error_when_not_logged_in()
     {
-        $this->markTestSkipped();
-
         $response = $this->getJson('/api/user');
 
-        $response->assertStatus(401);
+        $response->assertUnauthorized();
     }
 
     public function test_it_returns_the_updated_user_on_updating()
